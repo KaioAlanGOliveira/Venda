@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Sapatos</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .formulario {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input, button {
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #222;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .sapatos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .sapato {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+
+        .barato {
+            border-left: 6px solid green;
+        }
+
+        .caro {
+            border-left: 6px solid red;
+        }
+
+        .preco {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .barato .preco {
+            color: green;
+        }
+
+        .caro .preco {
+            color: red;
+        }
+
+        .excluir {
+            margin-top: 10px;
+            background: #d33;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>👟 Cadastro de Sapatos</h1>
+
+    <div class="formulario">
+
+        <input type="text" id="nome" placeholder="Nome do sapato">
+
+        <input type="text" id="marca" placeholder="Marca">
+
+        <input type="number" id="preco" placeholder="Preço">
+
+        <button onclick="cadastrarSapato()">
+            Cadastrar Sapato
+        </button>
+
+    </div>
+
+    <h2>Produtos cadastrados</h2>
+
+    <div id="listaSapatos" class="sapatos"></div>
+
+</div>
+
+<script>
+
+    let sapatos = [
+        {
+            nome: "Tênis Básico",
+            marca: "Nike",
+            preco: 99.90
+        },
+        {
+            nome: "Tênis Esportivo",
+            marca: "Adidas",
+            preco: 299.90
+        },
+        {
+            nome: "Tênis Premium",
+            marca: "Gucci",
+            preco: 15000
+        },
+        {
+            nome: "Sapato de Luxo",
+            marca: "Louis Vuitton",
+            preco: 50000
+        }
+    ];
+
+
+    function cadastrarSapato() {
+
+        const nome = document.getElementById("nome").value;
+        const marca = document.getElementById("marca").value;
+        const preco = Number(document.getElementById("preco").value);
+
+        if (nome === "" || marca === "" || preco <= 0) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        const sapato = {
+            nome: nome,
+            marca: marca,
+            preco: preco
+        };
+
+        sapatos.push(sapato);
+
+        limparCampos();
+
+        mostrarSapatos();
+    }
+
+
+    function mostrarSapatos() {
+
+        const lista = document.getElementById("listaSapatos");
+
+        lista.innerHTML = "";
+
+        sapatos.forEach((sapato, index) => {
+
+            let classe = "";
+
+            if (sapato.preco < 500) {
+                classe = "barato";
+            } else {
+                classe = "caro";
+            }
+
+            lista.innerHTML += `
+
+                <div class="sapato ${classe}">
+
+                    <h3>${sapato.nome}</h3>
+
+                    <p>
+                        <strong>Marca:</strong>
+                        ${sapato.marca}
+                    </p>
+
+                    <p class="preco">
+                        R$ ${sapato.preco.toLocaleString(
+                            "pt-BR",
+                            {
+                                minimumFractionDigits: 2
+                            }
+                        )}
+                    </p>
+
+                    <button
+                        class="excluir"
+                        onclick="excluirSapato(${index})">
+
+                        Excluir
+
+                    </button>
+
+                </div>
+
+            `;
+        });
+    }
+
+
+    function excluirSapato(index) {
+
+        sapatos.splice(index, 1);
+
+        mostrarSapatos();
+    }
+
+
+    function limparCampos() {
+
+        document.getElementById("nome").value = "";
+        document.getElementById("marca").value = "";
+        document.getElementById("preco").value = "";
+
+    }
+
+
+    // Carrega os sapatos quando a página abre
+    mostrarSapatos();
+
+</script>
+
+</body>
+</html>
