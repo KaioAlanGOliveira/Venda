@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Original Paraguayan Footwear</title>
+    <title>Paraguayan Shoe Store</title>
     <style>
         :root {
             --red: #CE1126;
@@ -477,8 +477,8 @@
 
 <div class="container">
     <div class="header">
-        <h1>🇵🇾 Original Paraguayan Footwear</h1>
-        <p>Inspired by Guaraní culture • Ñandutí • Itaipú</p>
+        <h1>🇵🇾 Paraguayan Shoe Store</h1>
+        <p>Nike • Adidas • Gucci • Louis Vuitton</p>
     </div>
 
     <div class="content">
@@ -502,7 +502,7 @@
             </div>
         </div>
 
-        <h2>📦 Paraguayan Collection <span class="count" id="count">0</span></h2>
+        <h2>📦 Our Collection <span class="count" id="count">0</span></h2>
         <div id="productList" class="products"></div>
     </div>
 </div>
@@ -523,76 +523,45 @@
 <script>
     const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&h=400&fit=crop";
 
-    // 3 baratos + vários premium + preços ABSURDOS
+    // Shoes from the store dialogue (Duda, Pedro, Italo, Enzo, Kaio)
     const INITIAL_SHOES = [
-        // === 3 mais baratos ===
         {
             id: 1,
-            name: "Ñandutí Basic",
-            brand: "Guarani Steps",
-            price: 49.90,
+            name: "Basic Nike Sneaker",
+            brand: "Nike",
+            price: 99.90,
             image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=400&fit=crop"
         },
         {
             id: 2,
-            name: "Asunción Street",
-            brand: "Itaipú Wear",
-            price: 79.50,
+            name: "Adidas Sports Sneaker",
+            brand: "Adidas",
+            price: 299.90,
             image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&h=400&fit=crop"
         },
         {
             id: 3,
-            name: "Yerba Mate Walk",
-            brand: "Chaco Original",
-            price: 99.00,
-            image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&h=400&fit=crop"
-        },
-        // === Premium normais ===
-        {
-            id: 4,
-            name: "Río Paraná Classic",
-            brand: "Guarani Steps",
-            price: 459.90,
-            image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500&h=400&fit=crop"
-        },
-        {
-            id: 5,
-            name: "Sol de Encarnación",
-            brand: "Paraguay Heritage",
-            price: 899.00,
-            image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500&h=400&fit=crop"
-        },
-        // === PREÇOS EXTREMAMENTE ABSURDOS ===
-        {
-            id: 6,
-            name: "Luque Diamond Elite",
-            brand: "Ñeembucú Atelier",
-            price: 12850.00,
+            name: "Gucci Premium Sneaker",
+            brand: "Gucci",
+            price: 15000.00,
             image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=400&fit=crop"
         },
         {
-            id: 7,
-            name: "Itaipú Golden Legend",
-            brand: "Paraguay Royal",
-            price: 45999.00,
+            id: 4,
+            name: "Louis Vuitton Luxury Shoe",
+            brand: "Louis Vuitton",
+            price: 50000.00,
             image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&h=400&fit=crop"
-        },
-        {
-            id: 8,
-            name: "Ñandutí Infinity One",
-            brand: "Guaraní Gods",
-            price: 99999.99,
-            image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=400&fit=crop"
         }
     ];
 
-    let shoes = JSON.parse(localStorage.getItem("paraguayShoes")) || INITIAL_SHOES;
+    let shoes = JSON.parse(localStorage.getItem("paraguayShoesV2")) || INITIAL_SHOES;
     let currentFilter = "all";
     let editingId = null;
     let deleteId = null;
 
     function save() {
-        localStorage.setItem("paraguayShoes", JSON.stringify(shoes));
+        localStorage.setItem("paraguayShoesV2", JSON.stringify(shoes));
     }
 
     function showToast(message, type = "success") {
@@ -756,7 +725,7 @@
                 <div class="product ${type}">
                     <span class="badge">${badge}</span>
                     <a class="img-link" href="${shoe.image}" target="_blank" rel="noopener noreferrer" title="Open image">
-                        <img src="\( {shoe.image}" alt=" \){shoe.name}" loading="lazy"
+                        <img src="${shoe.image}" alt="${shoe.name}" loading="lazy"
                              onerror="this.src='${DEFAULT_IMAGE}'">
                     </a>
                     <div class="product-info">
