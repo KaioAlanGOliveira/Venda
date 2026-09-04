@@ -1,243 +1,368 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Sapatos</title>
-
+    <title>Original Paraguayan Footwear</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
+        :root {
+            --red: #D52B1E;
+            --blue: #0038A8;
+            --white: #FFFFFF;
+            --light-gray: #F7F7F7;
+            --gray: #E8E8E8;
+            --text: #222;
+        }
+
+        * {
             margin: 0;
-            padding: 30px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #fff5f5 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: var(--text);
         }
 
         .container {
-            max-width: 900px;
-            margin: auto;
+            max-width: 1100px;
+            margin: 0 auto;
             background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 56, 168, 0.12);
+            overflow: hidden;
         }
 
-        h1 {
+        /* Header inspired by the Paraguayan flag */
+        .header {
+            background: linear-gradient(90deg, var(--red) 0%, var(--red) 33%, white 33%, white 66%, var(--blue) 66%);
+            padding: 28px 30px;
             text-align: center;
+            position: relative;
         }
 
-        .formulario {
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--red), white, var(--blue));
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.9rem;
+            font-weight: 700;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.95);
+            margin-top: 6px;
+            font-size: 0.95rem;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        /* Form */
+        .form {
             display: grid;
-            gap: 10px;
-            margin-bottom: 25px;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 12px;
+            margin-bottom: 35px;
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid var(--gray);
         }
 
-        input, button {
-            padding: 12px;
-            font-size: 16px;
+        input {
+            padding: 13px 16px;
+            font-size: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--blue);
         }
 
         button {
-            background: #222;
-            color: white;
+            padding: 13px 22px;
+            font-size: 15px;
+            font-weight: 600;
             border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background: #444;
-        }
-
-        .sapatos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
-
-        .sapato {
-            border: 1px solid #ddd;
-            padding: 15px;
             border-radius: 10px;
-            background: #fafafa;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .barato {
-            border-left: 6px solid green;
+        .btn-add {
+            background: var(--blue);
+            color: white;
         }
 
-        .caro {
-            border-left: 6px solid red;
+        .btn-add:hover {
+            background: #002a80;
+            transform: translateY(-1px);
         }
 
-        .preco {
-            font-size: 20px;
-            font-weight: bold;
+        h2 {
+            font-size: 1.35rem;
+            margin-bottom: 18px;
+            color: var(--blue);
         }
 
-        .barato .preco {
-            color: green;
+        /* Product grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 22px;
         }
 
-        .caro .preco {
-            color: red;
+        .product {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .excluir {
-            margin-top: 10px;
-            background: #d33;
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+        }
+
+        .product.affordable {
+            border-left: 6px solid #2e7d32;
+        }
+
+        .product.premium {
+            border-left: 6px solid var(--red);
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            background: #f0f0f0;
+        }
+
+        .product-info {
+            padding: 16px 18px 18px;
+        }
+
+        .product h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: #111;
+        }
+
+        .product p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .price {
+            font-size: 1.3rem !important;
+            font-weight: 700;
+            margin: 10px 0 14px !important;
+        }
+
+        .affordable .price {
+            color: #2e7d32;
+        }
+
+        .premium .price {
+            color: var(--red);
+        }
+
+        .delete {
+            background: #c62828;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .delete:hover {
+            background: #a01818;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 9px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            z-index: 2;
+        }
+
+        .affordable .badge {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .premium .badge {
+            background: #ffebee;
+            color: var(--red);
+        }
+
+        @media (max-width: 700px) {
+            .form {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <h1>👟 Cadastro de Sapatos</h1>
-
-    <div class="formulario">
-
-        <input type="text" id="nome" placeholder="Nome do sapato">
-
-        <input type="text" id="marca" placeholder="Marca">
-
-        <input type="number" id="preco" placeholder="Preço">
-
-        <button onclick="cadastrarSapato()">
-            Cadastrar Sapato
-        </button>
-
+    <div class="header">
+        <h1>🇵🇾 Original Paraguayan Footwear</h1>
+        <p>Inspired by Guaraní culture • Ñandutí • Itaipú</p>
     </div>
 
-    <h2>Produtos cadastrados</h2>
+    <div class="content">
 
-    <div id="listaSapatos" class="sapatos"></div>
+        <div class="form">
+            <input type="text" id="name" placeholder="Shoe name">
+            <input type="text" id="brand" placeholder="Brand">
+            <input type="number" id="price" placeholder="Price (USD)" min="1" step="0.01">
+            <button class="btn-add" onclick="addShoe()">
+                + Add Shoe
+            </button>
+        </div>
 
+        <h2>📦 Paraguayan Collection</h2>
+
+        <div id="productList" class="products"></div>
+
+    </div>
 </div>
 
 <script>
-
-    let sapatos = [
+    // Original Paraguay-inspired products with real shoe images
+    let shoes = [
         {
-            nome: "Tênis Básico",
-            marca: "Nike",
-            preco: 99.90
+            name: "Ñandutí Runner",
+            brand: "Guarani Steps",
+            price: 189.90,
+            image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=400&fit=crop"
         },
         {
-            nome: "Tênis Esportivo",
-            marca: "Adidas",
-            preco: 299.90
+            name: "Asunción Urban",
+            brand: "Itaipú Wear",
+            price: 349.00,
+            image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&h=400&fit=crop"
         },
         {
-            nome: "Tênis Premium",
-            marca: "Gucci",
-            preco: 15000
+            name: "Yerba Mate Trek",
+            brand: "Chaco Original",
+            price: 279.50,
+            image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&h=400&fit=crop"
         },
         {
-            nome: "Sapato de Luxo",
-            marca: "Louis Vuitton",
-            preco: 50000
+            name: "Sol de Encarnación",
+            brand: "Paraguay Heritage",
+            price: 899.00,
+            image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500&h=400&fit=crop"
+        },
+        {
+            name: "Río Paraná Classic",
+            brand: "Guarani Steps",
+            price: 459.90,
+            image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500&h=400&fit=crop"
+        },
+        {
+            name: "Luque Elite",
+            brand: "Ñeembucú Atelier",
+            price: 1250.00,
+            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=400&fit=crop"
         }
     ];
 
+    function addShoe() {
+        const name = document.getElementById("name").value.trim();
+        const brand = document.getElementById("brand").value.trim();
+        const price = Number(document.getElementById("price").value);
 
-    function cadastrarSapato() {
-
-        const nome = document.getElementById("nome").value;
-        const marca = document.getElementById("marca").value;
-        const preco = Number(document.getElementById("preco").value);
-
-        if (nome === "" || marca === "" || preco <= 0) {
-            alert("Preencha todos os campos!");
+        if (!name || !brand || price <= 0) {
+            alert("Please fill in all fields correctly!");
             return;
         }
 
-        const sapato = {
-            nome: nome,
-            marca: marca,
-            preco: preco
-        };
+        // Default image for new shoes
+        const defaultImage = "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&h=400&fit=crop";
 
-        sapatos.push(sapato);
-
-        limparCampos();
-
-        mostrarSapatos();
+        shoes.push({ name, brand, price, image: defaultImage });
+        clearFields();
+        renderShoes();
     }
 
+    function renderShoes() {
+        const list = document.getElementById("productList");
+        list.innerHTML = "";
 
-    function mostrarSapatos() {
+        shoes.forEach((shoe, index) => {
+            const type = shoe.price < 500 ? "affordable" : "premium";
+            const badge = shoe.price < 500 ? "Affordable" : "Premium";
 
-        const lista = document.getElementById("listaSapatos");
-
-        lista.innerHTML = "";
-
-        sapatos.forEach((sapato, index) => {
-
-            let classe = "";
-
-            if (sapato.preco < 500) {
-                classe = "barato";
-            } else {
-                classe = "caro";
-            }
-
-            lista.innerHTML += `
-
-                <div class="sapato ${classe}">
-
-                    <h3>${sapato.nome}</h3>
-
-                    <p>
-                        <strong>Marca:</strong>
-                        ${sapato.marca}
-                    </p>
-
-                    <p class="preco">
-                        R$ ${sapato.preco.toLocaleString(
-                            "pt-BR",
-                            {
+            list.innerHTML += `
+                <div class="product ${type}">
+                    <span class="badge">${badge}</span>
+                    <img src="\( {shoe.image}" alt=" \){shoe.name}" loading="lazy">
+                    <div class="product-info">
+                        <h3>${shoe.name}</h3>
+                        <p><strong>Brand:</strong> ${shoe.brand}</p>
+                        <p class="price">
+                            $${shoe.price.toLocaleString("en-US", {
                                 minimumFractionDigits: 2
-                            }
-                        )}
-                    </p>
-
-                    <button
-                        class="excluir"
-                        onclick="excluirSapato(${index})">
-
-                        Excluir
-
-                    </button>
-
+                            })}
+                        </p>
+                        <button class="delete" onclick="deleteShoe(${index})">
+                            Delete
+                        </button>
+                    </div>
                 </div>
-
             `;
         });
     }
 
-
-    function excluirSapato(index) {
-
-        sapatos.splice(index, 1);
-
-        mostrarSapatos();
+    function deleteShoe(index) {
+        shoes.splice(index, 1);
+        renderShoes();
     }
 
-
-    function limparCampos() {
-
-        document.getElementById("nome").value = "";
-        document.getElementById("marca").value = "";
-        document.getElementById("preco").value = "";
-
+    function clearFields() {
+        document.getElementById("name").value = "";
+        document.getElementById("brand").value = "";
+        document.getElementById("price").value = "";
     }
 
-
-    // Carrega os sapatos quando a página abre
-    mostrarSapatos();
-
+    // Load on page start
+    renderShoes();
 </script>
 
 </body>
