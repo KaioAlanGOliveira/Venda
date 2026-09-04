@@ -6,12 +6,14 @@
     <title>Original Paraguayan Footwear</title>
     <style>
         :root {
-            --red: #D52B1E;
+            --red: #CE1126;
             --blue: #0038A8;
             --white: #FFFFFF;
-            --light-gray: #F7F7F7;
-            --gray: #E8E8E8;
-            --text: #222;
+            --light: #F8F9FC;
+            --gray: #E5E7EB;
+            --text: #1a1a1a;
+            --green: #15803d;
+            --gold: #b45309;
         }
 
         * {
@@ -22,25 +24,29 @@
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #f0f4ff 0%, #fff5f5 100%);
+            background: linear-gradient(145deg, #eef2ff 0%, #fff1f2 50%, #eff6ff 100%);
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 28px 16px;
             color: var(--text);
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1120px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 12px 40px rgba(0, 56, 168, 0.12);
+            border-radius: 22px;
+            box-shadow: 0 20px 50px rgba(0, 56, 168, 0.15);
             overflow: hidden;
+            border: 1px solid rgba(0,56,168,0.08);
         }
 
-        /* Header inspired by the Paraguayan flag */
+        /* Header - bandeira do Paraguai */
         .header {
-            background: linear-gradient(90deg, var(--red) 0%, var(--red) 33%, white 33%, white 66%, var(--blue) 66%);
-            padding: 28px 30px;
+            background: linear-gradient(90deg, 
+                var(--red) 0%, var(--red) 33.33%, 
+                var(--white) 33.33%, var(--white) 66.66%, 
+                var(--blue) 66.66%);
+            padding: 32px 24px;
             text-align: center;
             position: relative;
         }
@@ -51,113 +57,215 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--red), white, var(--blue));
+            height: 7px;
+            background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
         }
 
         .header h1 {
             color: white;
-            font-size: 1.9rem;
-            font-weight: 700;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            font-size: 2rem;
+            font-weight: 800;
+            text-shadow: 0 3px 12px rgba(0,0,0,0.35);
+            letter-spacing: -0.5px;
         }
 
         .header p {
             color: rgba(255,255,255,0.95);
-            margin-top: 6px;
-            font-size: 0.95rem;
+            margin-top: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.25);
         }
 
         .content {
-            padding: 30px;
+            padding: 28px 24px 36px;
         }
 
         /* Form */
         .form {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr 1.4fr auto;
             gap: 12px;
-            margin-bottom: 35px;
-            background: var(--light-gray);
+            margin-bottom: 28px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
             padding: 20px;
-            border-radius: 14px;
-            border: 1px solid var(--gray);
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
         }
 
         input {
-            padding: 13px 16px;
+            padding: 13px 15px;
             font-size: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
+            border: 2px solid #d1d5db;
+            border-radius: 11px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
+            background: white;
         }
 
         input:focus {
             border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(0, 56, 168, 0.15);
         }
 
         button {
-            padding: 13px 22px;
+            padding: 13px 20px;
             font-size: 15px;
             font-weight: 600;
             border: none;
-            border-radius: 10px;
+            border-radius: 11px;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .btn-add {
-            background: var(--blue);
+            background: linear-gradient(135deg, var(--blue), #002a80);
             color: white;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 56, 168, 0.3);
         }
 
         .btn-add:hover {
-            background: #002a80;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 56, 168, 0.4);
         }
 
-        h2 {
-            font-size: 1.35rem;
-            margin-bottom: 18px;
+        .btn-cancel {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding-left: 42px;
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 16px;
+            border: 2px solid #d1d5db;
+            background: white;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .filter-btn.active {
+            background: var(--blue);
+            color: white;
+            border-color: var(--blue);
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: var(--blue);
             color: var(--blue);
         }
 
-        /* Product grid */
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 18px;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .count {
+            background: var(--red);
+            color: white;
+            font-size: 0.78rem;
+            padding: 4px 11px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        /* Products */
         .products {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 22px;
         }
 
         .product {
             background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
             overflow: hidden;
             position: relative;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.45s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .product:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.12);
         }
 
         .product.affordable {
-            border-left: 6px solid #2e7d32;
+            border-left: 7px solid var(--green);
         }
 
         .product.premium {
-            border-left: 6px solid var(--red);
+            border-left: 7px solid var(--red);
+        }
+
+        .product.absurd {
+            border-left: 7px solid var(--gold);
+        }
+
+        .product a.img-link {
+            display: block;
+            position: relative;
+            overflow: hidden;
         }
 
         .product img {
             width: 100%;
-            height: 180px;
+            height: 185px;
             object-fit: cover;
             display: block;
-            background: #f0f0f0;
+            background: #f3f4f6;
+            transition: transform 0.4s ease;
+        }
+
+        .product:hover img {
+            transform: scale(1.06);
         }
 
         .product-info {
@@ -165,41 +273,55 @@
         }
 
         .product h3 {
-            font-size: 1.1rem;
+            font-size: 1.12rem;
             margin-bottom: 6px;
             color: #111;
+            font-weight: 700;
         }
 
         .product p {
             font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 4px;
+            color: #4b5563;
+            margin-bottom: 3px;
         }
 
         .price {
-            font-size: 1.3rem !important;
-            font-weight: 700;
+            font-size: 1.35rem !important;
+            font-weight: 800;
             margin: 10px 0 14px !important;
         }
 
-        .affordable .price {
-            color: #2e7d32;
+        .affordable .price { color: var(--green); }
+        .premium .price { color: var(--red); }
+        .absurd .price { color: var(--gold); }
+
+        .actions {
+            display: flex;
+            gap: 8px;
         }
 
-        .premium .price {
-            color: var(--red);
-        }
-
-        .delete {
-            background: #c62828;
-            color: white;
-            width: 100%;
+        .actions button {
+            flex: 1;
             padding: 10px;
-            font-size: 14px;
+            font-size: 13.5px;
         }
 
-        .delete:hover {
-            background: #a01818;
+        .btn-edit {
+            background: #1d4ed8;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #1e40af;
+        }
+
+        .btn-delete {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
         }
 
         .badge {
@@ -207,30 +329,146 @@
             top: 12px;
             right: 12px;
             font-size: 11px;
-            font-weight: 600;
-            padding: 4px 9px;
+            font-weight: 700;
+            padding: 5px 10px;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.4px;
             z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
 
         .affordable .badge {
-            background: #e8f5e9;
-            color: #2e7d32;
+            background: #dcfce7;
+            color: var(--green);
         }
 
         .premium .badge {
-            background: #ffebee;
+            background: #fee2e2;
             color: var(--red);
         }
 
-        @media (max-width: 700px) {
+        .absurd .badge {
+            background: #fef3c7;
+            color: var(--gold);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+            color: #9ca3af;
+            grid-column: 1 / -1;
+        }
+
+        .empty span {
+            font-size: 3.2rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #1f2937;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success { background: var(--green); }
+        .toast.error { background: #dc2626; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            max-width: 380px;
+            width: 92%;
+            text-align: center;
+            transform: scale(0.88);
+            transition: transform 0.25s;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal h3 {
+            margin-bottom: 8px;
+            font-size: 1.25rem;
+        }
+
+        .modal p {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+        }
+
+        @media (max-width: 820px) {
+            .form {
+                grid-template-columns: 1fr 1fr;
+            }
+            .form button {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 560px) {
             .form {
                 grid-template-columns: 1fr;
             }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
             .header h1 {
-                font-size: 1.5rem;
+                font-size: 1.55rem;
+            }
+            .filters {
+                justify-content: center;
             }
         }
     </style>
@@ -238,130 +476,306 @@
 <body>
 
 <div class="container">
-
     <div class="header">
         <h1>🇵🇾 Original Paraguayan Footwear</h1>
         <p>Inspired by Guaraní culture • Ñandutí • Itaipú</p>
     </div>
 
     <div class="content">
-
-        <div class="form">
-            <input type="text" id="name" placeholder="Shoe name">
-            <input type="text" id="brand" placeholder="Brand">
-            <input type="number" id="price" placeholder="Price (USD)" min="1" step="0.01">
-            <button class="btn-add" onclick="addShoe()">
-                + Add Shoe
-            </button>
+        <div class="form" id="form">
+            <input type="text" id="name" placeholder="Shoe name" required>
+            <input type="text" id="brand" placeholder="Brand" required>
+            <input type="number" id="price" placeholder="Price (USD)" min="1" step="0.01" required>
+            <input type="url" id="image" placeholder="Image URL (optional)">
+            <button class="btn-add" id="submitBtn" onclick="handleSubmit()">+ Add Shoe</button>
         </div>
 
-        <h2>📦 Paraguayan Collection</h2>
+        <div class="toolbar">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search by name or brand..." oninput="renderShoes()">
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+                <button class="filter-btn" data-filter="affordable" onclick="setFilter('affordable')">Affordable</button>
+                <button class="filter-btn" data-filter="premium" onclick="setFilter('premium')">Premium</button>
+                <button class="filter-btn" data-filter="absurd" onclick="setFilter('absurd')">Absurd 🔥</button>
+            </div>
+        </div>
 
+        <h2>📦 Paraguayan Collection <span class="count" id="count">0</span></h2>
         <div id="productList" class="products"></div>
+    </div>
+</div>
 
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <h3>Delete this shoe?</h3>
+        <p>This action cannot be undone.</p>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn-delete" id="confirmDelete">Delete</button>
+        </div>
     </div>
 </div>
 
 <script>
-    // Original Paraguay-inspired products with real shoe images
-    let shoes = [
+    const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&h=400&fit=crop";
+
+    // 3 baratos + vários premium + preços ABSURDOS
+    const INITIAL_SHOES = [
+        // === 3 mais baratos ===
         {
-            name: "Ñandutí Runner",
+            id: 1,
+            name: "Ñandutí Basic",
             brand: "Guarani Steps",
-            price: 189.90,
+            price: 49.90,
             image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=400&fit=crop"
         },
         {
-            name: "Asunción Urban",
+            id: 2,
+            name: "Asunción Street",
             brand: "Itaipú Wear",
-            price: 349.00,
+            price: 79.50,
             image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&h=400&fit=crop"
         },
         {
-            name: "Yerba Mate Trek",
+            id: 3,
+            name: "Yerba Mate Walk",
             brand: "Chaco Original",
-            price: 279.50,
+            price: 99.00,
             image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&h=400&fit=crop"
         },
+        // === Premium normais ===
         {
-            name: "Sol de Encarnación",
-            brand: "Paraguay Heritage",
-            price: 899.00,
-            image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500&h=400&fit=crop"
-        },
-        {
+            id: 4,
             name: "Río Paraná Classic",
             brand: "Guarani Steps",
             price: 459.90,
             image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500&h=400&fit=crop"
         },
         {
-            name: "Luque Elite",
+            id: 5,
+            name: "Sol de Encarnación",
+            brand: "Paraguay Heritage",
+            price: 899.00,
+            image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500&h=400&fit=crop"
+        },
+        // === PREÇOS EXTREMAMENTE ABSURDOS ===
+        {
+            id: 6,
+            name: "Luque Diamond Elite",
             brand: "Ñeembucú Atelier",
-            price: 1250.00,
+            price: 12850.00,
             image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=400&fit=crop"
+        },
+        {
+            id: 7,
+            name: "Itaipú Golden Legend",
+            brand: "Paraguay Royal",
+            price: 45999.00,
+            image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=500&h=400&fit=crop"
+        },
+        {
+            id: 8,
+            name: "Ñandutí Infinity One",
+            brand: "Guaraní Gods",
+            price: 99999.99,
+            image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=400&fit=crop"
         }
     ];
 
-    function addShoe() {
+    let shoes = JSON.parse(localStorage.getItem("paraguayShoes")) || INITIAL_SHOES;
+    let currentFilter = "all";
+    let editingId = null;
+    let deleteId = null;
+
+    function save() {
+        localStorage.setItem("paraguayShoes", JSON.stringify(shoes));
+    }
+
+    function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    function setFilter(filter) {
+        currentFilter = filter;
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.filter === filter);
+        });
+        renderShoes();
+    }
+
+    function handleSubmit() {
         const name = document.getElementById("name").value.trim();
         const brand = document.getElementById("brand").value.trim();
         const price = Number(document.getElementById("price").value);
+        const image = document.getElementById("image").value.trim() || DEFAULT_IMAGE;
 
         if (!name || !brand || price <= 0) {
-            alert("Please fill in all fields correctly!");
+            showToast("Please fill in all required fields correctly!", "error");
             return;
         }
 
-        // Default image for new shoes
-        const defaultImage = "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&h=400&fit=crop";
+        if (editingId !== null) {
+            const shoe = shoes.find(s => s.id === editingId);
+            if (shoe) {
+                shoe.name = name;
+                shoe.brand = brand;
+                shoe.price = price;
+                shoe.image = image;
+                showToast("Shoe updated successfully!");
+            }
+            cancelEdit();
+        } else {
+            const newId = shoes.length ? Math.max(...shoes.map(s => s.id)) + 1 : 1;
+            shoes.push({ id: newId, name, brand, price, image });
+            showToast("Shoe added successfully!");
+        }
 
-        shoes.push({ name, brand, price, image: defaultImage });
+        save();
         clearFields();
         renderShoes();
     }
 
-    function renderShoes() {
-        const list = document.getElementById("productList");
-        list.innerHTML = "";
+    function editShoe(id) {
+        const shoe = shoes.find(s => s.id === id);
+        if (!shoe) return;
 
-        shoes.forEach((shoe, index) => {
-            const type = shoe.price < 500 ? "affordable" : "premium";
-            const badge = shoe.price < 500 ? "Affordable" : "Premium";
+        editingId = id;
+        document.getElementById("name").value = shoe.name;
+        document.getElementById("brand").value = shoe.brand;
+        document.getElementById("price").value = shoe.price;
+        document.getElementById("image").value = shoe.image === DEFAULT_IMAGE ? "" : shoe.image;
 
-            list.innerHTML += `
-                <div class="product ${type}">
-                    <span class="badge">${badge}</span>
-                    <img src="\( {shoe.image}" alt=" \){shoe.name}" loading="lazy">
-                    <div class="product-info">
-                        <h3>${shoe.name}</h3>
-                        <p><strong>Brand:</strong> ${shoe.brand}</p>
-                        <p class="price">
-                            $${shoe.price.toLocaleString("en-US", {
-                                minimumFractionDigits: 2
-                            })}
-                        </p>
-                        <button class="delete" onclick="deleteShoe(${index})">
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            `;
-        });
+        const btn = document.getElementById("submitBtn");
+        btn.textContent = "Save Changes";
+        btn.style.background = "linear-gradient(135deg, #1d4ed8, #1e40af)";
+
+        if (!document.getElementById("cancelBtn")) {
+            const cancel = document.createElement("button");
+            cancel.id = "cancelBtn";
+            cancel.className = "btn-cancel";
+            cancel.textContent = "Cancel";
+            cancel.onclick = cancelEdit;
+            document.getElementById("form").appendChild(cancel);
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function deleteShoe(index) {
-        shoes.splice(index, 1);
-        renderShoes();
+    function cancelEdit() {
+        editingId = null;
+        clearFields();
+        const btn = document.getElementById("submitBtn");
+        btn.textContent = "+ Add Shoe";
+        btn.style.background = "";
+        const cancel = document.getElementById("cancelBtn");
+        if (cancel) cancel.remove();
     }
+
+    function askDelete(id) {
+        deleteId = id;
+        document.getElementById("modal").classList.add("show");
+    }
+
+    function closeModal() {
+        document.getElementById("modal").classList.remove("show");
+        deleteId = null;
+    }
+
+    document.getElementById("confirmDelete").onclick = () => {
+        if (deleteId !== null) {
+            shoes = shoes.filter(s => s.id !== deleteId);
+            save();
+            renderShoes();
+            showToast("Shoe deleted");
+        }
+        closeModal();
+    };
 
     function clearFields() {
         document.getElementById("name").value = "";
         document.getElementById("brand").value = "";
         document.getElementById("price").value = "";
+        document.getElementById("image").value = "";
     }
 
-    // Load on page start
+    function getType(price) {
+        if (price >= 5000) return "absurd";
+        if (price >= 500) return "premium";
+        return "affordable";
+    }
+
+    function getBadge(price) {
+        if (price >= 5000) return "Absurd 🔥";
+        if (price >= 500) return "Premium";
+        return "Affordable";
+    }
+
+    function renderShoes() {
+        const list = document.getElementById("productList");
+        const search = document.getElementById("search").value.toLowerCase().trim();
+
+        let filtered = shoes.filter(shoe => {
+            const matchesSearch =
+                shoe.name.toLowerCase().includes(search) ||
+                shoe.brand.toLowerCase().includes(search);
+
+            const type = getType(shoe.price);
+            const matchesFilter =
+                currentFilter === "all" ||
+                (currentFilter === "affordable" && type === "affordable") ||
+                (currentFilter === "premium" && type === "premium") ||
+                (currentFilter === "absurd" && type === "absurd");
+
+            return matchesSearch && matchesFilter;
+        });
+
+        document.getElementById("count").textContent = filtered.length;
+
+        if (filtered.length === 0) {
+            list.innerHTML = `
+                <div class="empty">
+                    <span>👟</span>
+                    <p>No shoes found</p>
+                </div>
+            `;
+            return;
+        }
+
+        list.innerHTML = filtered.map(shoe => {
+            const type = getType(shoe.price);
+            const badge = getBadge(shoe.price);
+
+            return `
+                <div class="product ${type}">
+                    <span class="badge">${badge}</span>
+                    <a class="img-link" href="${shoe.image}" target="_blank" rel="noopener noreferrer" title="Open image">
+                        <img src="\( {shoe.image}" alt=" \){shoe.name}" loading="lazy"
+                             onerror="this.src='${DEFAULT_IMAGE}'">
+                    </a>
+                    <div class="product-info">
+                        <h3>${shoe.name}</h3>
+                        <p><strong>Brand:</strong> ${shoe.brand}</p>
+                        <p class="price">
+                            $${shoe.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                        </p>
+                        <div class="actions">
+                            <button class="btn-edit" onclick="editShoe(${shoe.id})">Edit</button>
+                            <button class="btn-delete" onclick="askDelete(${shoe.id})">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    // Init
     renderShoes();
 </script>
 
